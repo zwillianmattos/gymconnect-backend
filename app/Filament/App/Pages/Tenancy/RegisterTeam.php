@@ -5,11 +5,14 @@ namespace App\Filament\App\Pages\Tenancy;
 use App\Models\Team;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Select;
 use Filament\Pages\Tenancy\RegisterTenant;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class RegisterTeam extends RegisterTenant
 {
+
       public static function getLabel(): string
       {
             return 'Register team';

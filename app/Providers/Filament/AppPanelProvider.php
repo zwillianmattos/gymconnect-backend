@@ -21,7 +21,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\Http\Responses\Auth\Contracts\LoginResponse as LoginResponseContract;
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -31,7 +31,6 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('app')
             ->login()
-            ->registration()
             ->profile()
             ->userMenuItems([
                 MenuItem::make()
@@ -46,7 +45,7 @@ class AppPanelProvider extends PanelProvider
                 'info' => Color::Blue,
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
-                'primary' => Color::Amber,
+                'primary' => Color::Purple,
             ])
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
@@ -73,7 +72,7 @@ class AppPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->tenant(Team::class, ownershipRelationship: 'team', slugAttribute: 'slug')
-            ->tenantRegistration(RegisterTeam::class)
+//            ->tenantRegistration(RegisterTeam::class)
             ->tenantProfile(EditTeamProfile::class);
     }
 }

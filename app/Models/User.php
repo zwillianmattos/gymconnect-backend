@@ -27,7 +27,8 @@ class User extends Authenticatable implements HasTenants
         'name',
         'email',
         'password',
-        'is_admin'
+        'is_admin',
+        'team_id',
     ];
 
     /**
@@ -49,20 +50,39 @@ class User extends Authenticatable implements HasTenants
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'is_admin' => 'boolean',
+        'team_id'  =>  'integer',
     ];
 
     public function getTenants(Panel $panel): Collection
     {
-        return $this->teams;
+        return collect([$this->team]);
     }
 
-    public function teams(): BelongsToMany
+    public function team()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsTo(Team::class);
     }
 
     public function canAccessTenant(Model $tenant): bool
     {
-        return $this->teams->contains($tenant);
+        $tenantTeamId = $tenant->id;
+        $userTeamId = $this->team->id;
+
+        return $userTeamId === $tenantTeamId;
     }
+
+//    public function getTenants(Panel $panel): Collection
+//    {
+//        return collect([$this->team]);
+//    }
+//    public function team()
+//    {
+//        return $this->belongsToMany(Team::class);
+//    }
+//    public function canAccessTenant(Model $tenant): bool
+//    {
+//        $tenantTeamId = $tenant->id;
+//        $userTeamId = $this->team->id;
+//        return $userTeamId === $tenantTeamId;
+//    }
 }

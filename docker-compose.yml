@@ -45,6 +45,19 @@ services:
         networks:
             - laravel
 
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        networks:
+            - laravel
+        environment:
+            PMA_HOST: host.docker.internal
+            PMA_PORT: 3388
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports:
+            - '8090:80'
+        volumes:
+            - /sessions
     # redis
     redis:
         image: redis:latest

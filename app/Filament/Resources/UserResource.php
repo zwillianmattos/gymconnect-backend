@@ -4,14 +4,20 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\State;
+use App\Models\Team;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class UserResource extends Resource
 {
@@ -46,6 +52,15 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('team_id')
+                    ->options(function (Get $get) {
+                        return Team::query()
+                            ->get(['name', 'id'])
+                            ->pluck('name', 'id');
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->required(),
             ]);
     }
 
@@ -57,8 +72,7 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
+                Tables\Columns\TextColumn::make('team_id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
