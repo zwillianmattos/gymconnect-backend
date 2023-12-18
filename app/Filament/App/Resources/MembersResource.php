@@ -1,37 +1,29 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\App\Resources;
 
-use App\Filament\Resources\GymsResource\Pages;
-use App\Filament\Resources\GymsResource\RelationManagers;
-use App\Models\Gyms;
-use App\Models\Gym;
+use App\Filament\App\Resources\MembersResource\Pages;
+use App\Filament\App\Resources\MembersResource\RelationManagers;
+use App\Models\Members;
 use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Carbon;
 
-class GymsResource extends Resource
+class MembersResource extends Resource
 {
-    protected static ?string $model = Gym::class;
+    protected static ?string $model = Members::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $navigationGroup = 'User Management';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name'),
-                TextInput::make('slug')->unique(column: 'slug'),
+                //
             ]);
     }
 
@@ -39,14 +31,10 @@ class GymsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->sortable(),
+                //
             ])
             ->filters([
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -68,9 +56,9 @@ class GymsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGyms::route('/'),
-            'create' => Pages\CreateGyms::route('/create'),
-            'edit' => Pages\EditGyms::route('/{record}/edit'),
+            'index' => Pages\ListMembers::route('/'),
+            'create' => Pages\CreateMembers::route('/create'),
+            'edit' => Pages\EditMembers::route('/{record}/edit'),
         ];
     }
 }

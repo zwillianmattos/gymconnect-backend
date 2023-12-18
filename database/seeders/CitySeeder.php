@@ -43535,7 +43535,7 @@ class CitySeeder extends Seeder
             array('name' => "Silver Cliff", 'state_id' => 3926),
             array('name' => "Snowmass Village", 'state_id' => 3926),
             array('name' => "Southglenn", 'state_id' => 3926),
-            array('name' => "Steamboat Springs", 'state_id' => 3926),
+            array('name' => "SGymboat Springs", 'state_id' => 3926),
             array('name' => "Sterling", 'state_id' => 3926),
             array('name' => "Superior", 'state_id' => 3926),
             array('name' => "Telluride", 'state_id' => 3926),

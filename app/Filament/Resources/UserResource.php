@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\State;
-use App\Models\Team;
+use App\Models\Gym;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -52,9 +52,9 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('team_id')
+                Forms\Components\Select::make('gym_id')
                     ->options(function (Get $get) {
-                        return Team::query()
+                        return Gym::query()
                             ->get(['name', 'id'])
                             ->pluck('name', 'id');
                     })
@@ -72,7 +72,7 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('team_id')
+                Tables\Columns\TextColumn::make('Gym_id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

@@ -2,7 +2,7 @@
 
 namespace App\Filament\App\Pages\Tenancy;
 
-use App\Models\Team;
+use App\Models\Gym;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -10,12 +10,12 @@ use Filament\Forms\Select;
 use Filament\Pages\Tenancy\RegisterTenant;
 use Illuminate\Support\Collection;
 
-class RegisterTeam extends RegisterTenant
+class RegisterGym extends RegisterTenant
 {
 
       public static function getLabel(): string
       {
-            return 'Register team';
+            return 'Register Gym';
       }
 
       public function form(Form $form): Form
@@ -27,12 +27,11 @@ class RegisterTeam extends RegisterTenant
                   ]);
       }
 
-      protected function handleRegistration(array $data): Team
+      protected function handleRegistration(array $data): Gym
       {
-            $team = Team::create($data);
+            $gym = Gym::create($data);
+            $gym->members()->attach(auth()->user());
 
-            $team->members()->attach(auth()->user());
-
-            return $team;
+            return $gym;
       }
 }

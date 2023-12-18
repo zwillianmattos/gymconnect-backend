@@ -2,9 +2,9 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\App\Pages\Tenancy\EditTeamProfile;
-use App\Filament\App\Pages\Tenancy\RegisterTeam;
-use App\Models\Team;
+use App\Filament\App\Pages\Tenancy\EditGymProfile;
+use App\Filament\App\Pages\Tenancy\RegisterGym;
+use App\Models\Gym;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -45,7 +45,7 @@ class AppPanelProvider extends PanelProvider
                 'info' => Color::Blue,
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
-                'primary' => Color::Purple,
+                'primary' => Color::Orange,
             ])
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
@@ -71,8 +71,8 @@ class AppPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->tenant(Team::class, ownershipRelationship: 'team', slugAttribute: 'slug')
-//            ->tenantRegistration(RegisterTeam::class)
-            ->tenantProfile(EditTeamProfile::class);
+            ->tenant(Gym::class, ownershipRelationship: 'gym', slugAttribute: 'slug')
+//            ->tenantRegistration(RegisterGym::class)
+            ->tenantProfile(EditGymProfile::class);
     }
 }

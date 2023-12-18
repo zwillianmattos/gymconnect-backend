@@ -12,7 +12,7 @@ class Department extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', ' team_id'
+        'name', ' Gym_id'
     ];
 
     public function employees(): HasMany
@@ -20,8 +20,8 @@ class Department extends Model
         return $this->hasMany(Employee::class);
     }
 
-    public function team(): BelongsTo
+    public function Gym(): BelongsTo
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Gym::class);
     }
 }
